@@ -24,7 +24,10 @@
 <script>
 var store = require('../store')
 
-var filters = require('../todofilter')
+// var filters = require('../todofilter')
+var all = require('../filters/all')
+var active = require('../filters/active')
+var completed = require('../filters/completed')
 
 
 module.exports = {
@@ -41,10 +44,16 @@ module.exports = {
 
   computed: {
     filteredTodos: function() {
-      return filters[this.visibility](this.todos);
+      var func;
+      switch(this.visibility){
+        case "all": func = all(this.todos);break;
+        case "active": func = active(this.todos);break;
+        case "completed": func = completed(this.todos);break;
+      }
+      return func;
     },
     remaining: function() {
-      return filters.active(this.todos).length;
+      return active(this.todos).length;
     },
     allDone: {
       get: function() {
