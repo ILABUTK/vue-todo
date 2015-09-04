@@ -1,9 +1,9 @@
 <template>
   <section class="todoapp">
     <app-header newTodo="{{newTodo}}" ></app-header>
-
+  
+    <component is="{{view}}"></component>
   </section>
-<component is="{{view}}"></component>
 <app-footer author="{{author}}"></app-footer>
 </template>
 
@@ -17,6 +17,7 @@ module.exports = {
     author: 'Evan You'
   },
   components: {
+    'main-view': require('./views/main-view.vue'),
     'app-header': require('./components/header.vue'),
     'app-footer': require('./components/footer.vue')
   }
