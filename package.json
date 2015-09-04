@@ -1,0 +1,30 @@
+{
+  "name": "vue-todo",
+  "version": "1.0.0",
+  "description": "vue-todo",
+  "main": "src/app.js",
+  "dependencies": {
+    "vue": "^0.12.10",
+    "director": "^1.2.8",
+    "todomvc-common": "^1.0.2",
+    "todomvc-app-css": "^2.0.1"
+  },
+  "devDependencies": {
+    "css-loader": "^0.15.6",
+    "html-loader": "^0.3.0",
+    "style-loader": "^0.12.3",
+    "stylus-loader": "^1.2.1",
+    "vue-loader": "^2.1.1",
+    "url-loader": "^0.5.6",
+    "file-loader": "^0.8.4",
+    "webpack": "^1.11.0",
+    "webpack-dev-server": "^1.10.1",
+    "extract-text-webpack-plugin": "^0.8.2"
+  },
+  "scripts": {
+    "dev": "webpack --watch",
+    "build": "webpack -p",
+    "server": "webpack-dev-server --devtool eval --hot --progress --colors"
+  },
+  "license": "MIT"
+}
