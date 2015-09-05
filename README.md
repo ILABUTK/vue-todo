@@ -7,7 +7,7 @@ Build vue-todo with Webpack.
 ``` bash
 npm install
 # dev:
-npm run server
+npm run serve
 # build:
 npm run build
 ```

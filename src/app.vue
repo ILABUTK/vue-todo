@@ -1,6 +1,6 @@
 <template>
   <section class="todoapp">
-    <component is="{{view}}"></component>
+    <router-view></router-view>
   </section>
 <app-footer author="{{author}}"></app-footer>
 </template>
@@ -9,13 +9,13 @@
 <script>
 module.exports = {
   el: '#app',
-  data: {
-    view: 'main-view',
-    author: 'Evan You',
-    visibility: 'all'
+  data: function() {
+    return {
+      author: 'Evan You',
+      visibility: 'all'
+    }
   },
   components: {
-    'main-view': require('./views/main-view.vue'),
     // 'app-header': require('./components/header.vue'),
     'app-footer': require('./components/footer.vue')
   }

@@ -32,9 +32,9 @@
       <strong v-text="remaining"></strong>{{remaining | pluralize 'item'}} left
     </span>
     <ul class="filters">
-      <li><a href="#/all" v-class="selected: visibility == 'all'">All</a></li>
-      <li><a href="#/active" v-class="selected: visibility == 'active'">Active</a></li>
-      <li><a href="#/completed" v-class="selected: visibility == 'completed'">completed</a></li>
+      <li><a v-link="/all" v-class="selected: visibility == 'all'">All</a></li>
+      <li><a v-link="/active" v-class="selected: visibility == 'active'">Active</a></li>
+      <li><a v-link="/completed" v-class="selected: visibility == 'completed'">completed</a></li>
     </ul>
     <button class="clear-completed" v-on="click:removeCompleted" v-show="todos.length > remaining">
       Clear completed
