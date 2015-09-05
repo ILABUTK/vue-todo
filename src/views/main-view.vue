@@ -1,4 +1,12 @@
 <template>
+  <header class="header">
+    <h1>todos</h1>
+    <input class="new-todo"
+      autofocus autocomplate="off"
+      placeholder="What needs to be done?"
+      v-model="newTodo"
+      v-on="keyup:addTodo | key 'enter'">
+  </header>
   <section class="main" v-show="todos.length" v-cloak>
     <input type="checkbox" class="toggle-all" v-model="allDone">
     <ul class="todo-list">
@@ -14,11 +22,24 @@
         v-model="todo.title"
         v-todo-focus="todo == editedTodo"
         v-on="blur: doneEdit(todo),
-              keyup: doneEdit(doto) | key 'enter
-              keyup: cancelEdit(todo) |key 'esc'">
+              keyup: doneEdit(todo) | key 'enter',
+              keyup: cancelEdit(todo) | key 'esc'">
       </li>
     </ul>
   </section>
+  <footer class="footer" v-show="todos.length" v-cloak>
+    <span class="todo-count">
+      <strong v-text="remaining"></strong>{{remaining | pluralize 'item'}} left
+    </span>
+    <ul class="filters">
+      <li><a href="#/all" v-class="selected: visibility == 'all'">All</a></li>
+      <li><a href="#/active" v-class="selected: visibility == 'active'">Active</a></li>
+      <li><a href="#/completed" v-class="selected: visibility == 'completed'">completed</a></li>
+    </ul>
+    <button class="clear-completed" v-on="click:removeCompleted" v-show="todos.length > remaining">
+      Clear completed
+    </button>
+  </footer>
 </template>
 
 <script>
@@ -31,10 +52,12 @@ var completed = require('../filters/completed')
 
 
 module.exports = {
+  inherit: true,
   data: function () {
     return {
       todos: store.fetch(),
-      visibility: 'all'
+      newTodo: '',
+      editedTodo: null
     }
   },
 
@@ -74,6 +97,15 @@ module.exports = {
   },
 
   methods: {
+    addTodo: function() {
+      var value = this.newTodo && this.newTodo.trim();
+      if(!value){
+      return;
+      }
+      this.todos.push({ title: value, completed: false});
+      this.newTodo = '';
+    },
+
     removeTodo: function(todo) {
       this.todos.$remove(todo);
     },
